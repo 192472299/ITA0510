@@ -1,0 +1,28 @@
+import cv2
+import numpy as np
+
+# 1. Load the original image
+# Replace 'corgi.jpg' with the actual path to your image file
+img = cv2.imread('corgi.jpg')
+
+# Check if the image loaded successfully
+if img is None:
+    print("Error: Could not open or find the image.")
+    exit()
+
+# 2. Define a kernel matrix for the dilation operation
+# A 5x5 rectangular matrix filled with ones is standard, 
+# but you can adjust the size (e.g., 3x3 or 7x7) to change the effect.
+kernel = np.ones((5, 5), np.uint8)
+
+# 3. Apply the dilation morphological transformation
+# 'iterations=1' means the dilation is applied once.
+dilated_img = cv2.dilate(img, kernel, iterations=1)
+
+# 4. Display the original and the processed images
+cv2.imshow('Origin...', img)
+cv2.imshow('Dilate...', dilated_img)
+
+# 5. Wait for a key press and then close the windows cleanly
+cv2.waitKey(0)
+cv2.destroyAllWindows()
